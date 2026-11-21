@@ -615,6 +615,66 @@ func (msgs Messages) DialogsRemoveBody() string {
 	return Catalog.Format(msgs.locale, "dialogsRemoveBody", nil)
 }
 
+// CoverCropTitle says "Crop cover"
+// in the language the app shows.
+func CoverCropTitle() string { return In(i18n.Locale()).CoverCropTitle() }
+
+// CoverCropTitle says "Crop cover"
+// in the language of msgs.
+func (msgs Messages) CoverCropTitle() string {
+	return Catalog.Format(msgs.locale, "coverCropTitle", nil)
+}
+
+// CoverCropFree says "Free"
+// in the language the app shows.
+func CoverCropFree() string { return In(i18n.Locale()).CoverCropFree() }
+
+// CoverCropFree says "Free"
+// in the language of msgs.
+func (msgs Messages) CoverCropFree() string {
+	return Catalog.Format(msgs.locale, "coverCropFree", nil)
+}
+
+// CoverCropApply says "Crop"
+// in the language the app shows.
+func CoverCropApply() string { return In(i18n.Locale()).CoverCropApply() }
+
+// CoverCropApply says "Crop"
+// in the language of msgs.
+func (msgs Messages) CoverCropApply() string {
+	return Catalog.Format(msgs.locale, "coverCropApply", nil)
+}
+
+// CoverCropReset says "Reset"
+// in the language the app shows.
+func CoverCropReset() string { return In(i18n.Locale()).CoverCropReset() }
+
+// CoverCropReset says "Reset"
+// in the language of msgs.
+func (msgs Messages) CoverCropReset() string {
+	return Catalog.Format(msgs.locale, "coverCropReset", nil)
+}
+
+// CoverCropLoading says "Loading…"
+// in the language the app shows.
+func CoverCropLoading() string { return In(i18n.Locale()).CoverCropLoading() }
+
+// CoverCropLoading says "Loading…"
+// in the language of msgs.
+func (msgs Messages) CoverCropLoading() string {
+	return Catalog.Format(msgs.locale, "coverCropLoading", nil)
+}
+
+// CoverCropSource says "Source {w} × {h} px"
+// in the language the app shows.
+func CoverCropSource(w int, h int) string { return In(i18n.Locale()).CoverCropSource(w, h) }
+
+// CoverCropSource says "Source {w} × {h} px"
+// in the language of msgs.
+func (msgs Messages) CoverCropSource(w int, h int) string {
+	return Catalog.Format(msgs.locale, "coverCropSource", map[string]any{"w": w, "h": h})
+}
+
 // DetailSelectBook says "Select a book to see its details"
 // in the language the app shows.
 func DetailSelectBook() string { return In(i18n.Locale()).DetailSelectBook() }

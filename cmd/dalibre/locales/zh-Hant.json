@@ -57,6 +57,22 @@
   "dialogsRemoveBooksTitle": "要移除 {count, plural, other {# 本書籍}}嗎？",
   "dialogsRemoveBookTitle": "要移除「{title}」嗎？",
   "dialogsRemoveBody": "書籍的檔案會移到垃圾桶，並從 calibre 書庫中移除。",
+  "coverCropTitle": "裁剪封面",
+  "coverCropFree": "自由",
+  "coverCropApply": "裁剪",
+  "coverCropReset": "重設",
+  "coverCropLoading": "載入中…",
+  "coverCropSource": "原始圖像 {w} × {h} px",
+  "@coverCropSource": {
+    "placeholders": {
+      "w": {
+        "type": "int"
+      },
+      "h": {
+        "type": "int"
+      }
+    }
+  },
   "detailSelectBook": "選擇一本書以查看詳細資訊",
   "detailBooksSelected": "已選取 {count, plural, other {# 本書籍}}",
   "detailMore": "更多",

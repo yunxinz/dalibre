@@ -57,6 +57,22 @@
   "dialogsRemoveBooksTitle": "{count, plural, other {책 #권}}을 제거하시겠습니까?",
   "dialogsRemoveBookTitle": "“{title}” 제거하시겠습니까?",
   "dialogsRemoveBody": "책 파일은 휴지통으로 옮겨지고, calibre 라이브러리에서 빠집니다.",
+  "coverCropTitle": "표지 자르기",
+  "coverCropFree": "자유",
+  "coverCropApply": "자르기",
+  "coverCropReset": "재설정",
+  "coverCropLoading": "불러오는 중…",
+  "coverCropSource": "원본 {w} × {h} px",
+  "@coverCropSource": {
+    "placeholders": {
+      "w": {
+        "type": "int"
+      },
+      "h": {
+        "type": "int"
+      }
+    }
+  },
   "detailSelectBook": "세부 정보를 보려면 책을 선택하세요",
   "detailBooksSelected": "{count, plural, other {책 #권 선택됨}}",
   "detailMore": "더보기",

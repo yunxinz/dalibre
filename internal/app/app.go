@@ -86,6 +86,7 @@ type App struct {
 	editOpen   bool
 	edit       editState
 	fetch      fetchState // the Edit metadata dialog's Fetch metadata step
+	crop       coverCrop  // the Edit metadata dialog's crop-cover step
 	deleteOpen bool
 	deleteIDs  []int64
 	jobsOpen   bool

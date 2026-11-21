@@ -57,6 +57,22 @@
   "dialogsRemoveBooksTitle": "Retirer {count, plural, one {# livre} many {# livres} other {# livres}} ?",
   "dialogsRemoveBookTitle": "Retirer « {title} » ?",
   "dialogsRemoveBody": "Les fichiers du livre sont déplacés dans la Corbeille, et le livre quitte la bibliothèque calibre.",
+  "coverCropTitle": "Rogner la couverture",
+  "coverCropFree": "Libre",
+  "coverCropApply": "Rogner",
+  "coverCropReset": "Réinitialiser",
+  "coverCropLoading": "Chargement…",
+  "coverCropSource": "Source {w} × {h} px",
+  "@coverCropSource": {
+    "placeholders": {
+      "w": {
+        "type": "int"
+      },
+      "h": {
+        "type": "int"
+      }
+    }
+  },
   "detailSelectBook": "Sélectionnez un livre pour voir ses détails",
   "detailBooksSelected": "{count, plural, one {# livre sélectionné} many {# livres sélectionnés} other {# livres sélectionnés}}",
   "detailMore": "Plus",

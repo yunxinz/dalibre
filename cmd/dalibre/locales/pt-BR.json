@@ -57,6 +57,22 @@
   "dialogsRemoveBooksTitle": "Remover {count, plural, one {# livro} many {# livros} other {# livros}}?",
   "dialogsRemoveBookTitle": "Remover “{title}”?",
   "dialogsRemoveBody": "Os arquivos do livro vão para a Lixeira e ele é removido da biblioteca calibre.",
+  "coverCropTitle": "Recortar capa",
+  "coverCropFree": "Livre",
+  "coverCropApply": "Recortar",
+  "coverCropReset": "Redefinir",
+  "coverCropLoading": "Carregando…",
+  "coverCropSource": "Origem {w} × {h} px",
+  "@coverCropSource": {
+    "placeholders": {
+      "w": {
+        "type": "int"
+      },
+      "h": {
+        "type": "int"
+      }
+    }
+  },
   "detailSelectBook": "Selecione um livro para ver os detalhes",
   "detailBooksSelected": "{count, plural, one {# livro selecionado} many {# livros selecionados} other {# livros selecionados}}",
   "detailMore": "Mais",

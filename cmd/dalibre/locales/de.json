@@ -57,6 +57,22 @@
   "dialogsRemoveBooksTitle": "{count, plural, one {# Buch} other {# Bücher}} entfernen?",
   "dialogsRemoveBookTitle": "„{title}“ entfernen?",
   "dialogsRemoveBody": "Die Dateien des Buchs werden in den Papierkorb verschoben, und es wird aus der calibre-Bibliothek entfernt.",
+  "coverCropTitle": "Cover zuschneiden",
+  "coverCropFree": "Frei",
+  "coverCropApply": "Zuschneiden",
+  "coverCropReset": "Zurücksetzen",
+  "coverCropLoading": "Laden…",
+  "coverCropSource": "Quelle {w} × {h} px",
+  "@coverCropSource": {
+    "placeholders": {
+      "w": {
+        "type": "int"
+      },
+      "h": {
+        "type": "int"
+      }
+    }
+  },
   "detailSelectBook": "Wählen Sie ein Buch, um die Details anzuzeigen",
   "detailBooksSelected": "{count, plural, one {# Buch ausgewählt} other {# Bücher ausgewählt}}",
   "detailMore": "Mehr",

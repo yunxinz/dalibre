@@ -57,6 +57,22 @@
   "dialogsRemoveBooksTitle": "{count, plural, other {# 冊}}を削除しますか？",
   "dialogsRemoveBookTitle": "「{title}」を削除しますか？",
   "dialogsRemoveBody": "本のファイルはゴミ箱に移動され、calibre ライブラリから削除されます。",
+  "coverCropTitle": "表紙をトリミング",
+  "coverCropFree": "自由",
+  "coverCropApply": "切り抜く",
+  "coverCropReset": "リセット",
+  "coverCropLoading": "読み込み中…",
+  "coverCropSource": "元画像 {w} × {h} px",
+  "@coverCropSource": {
+    "placeholders": {
+      "w": {
+        "type": "int"
+      },
+      "h": {
+        "type": "int"
+      }
+    }
+  },
   "detailSelectBook": "詳細を見る本を選択",
   "detailBooksSelected": "{count, plural, other {# 冊を選択中}}",
   "detailMore": "その他",

@@ -81,6 +81,22 @@
   },
   "dialogsRemoveBookTitle": "Remove “{title}”?",
   "dialogsRemoveBody": "The book’s files move to the Recycle Bin and it leaves the calibre library.",
+  "coverCropTitle": "Crop cover",
+  "coverCropFree": "Free",
+  "coverCropApply": "Crop",
+  "coverCropReset": "Reset",
+  "coverCropLoading": "Loading…",
+  "coverCropSource": "Source {w} × {h} px",
+  "@coverCropSource": {
+    "placeholders": {
+      "w": {
+        "type": "int"
+      },
+      "h": {
+        "type": "int"
+      }
+    }
+  },
   "detailSelectBook": "Select a book to see its details",
   "detailBooksSelected": "{count, plural, one {# book selected} other {# books selected}}",
   "@detailBooksSelected": {
