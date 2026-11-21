@@ -93,6 +93,7 @@ func (a *App) openEditor(b *calibre.Book) {
 	}
 	a.editOpen = true
 	a.fetch.open = false
+	a.crop.open = false
 }
 
 // metadata returns what the editor holds as calibre metadata.
@@ -141,6 +142,10 @@ func (a *App) editDialog(c *ui.Context) {
 		a.fetchDialog(c, b)
 		return
 	}
+	if a.crop.open {
+		a.cropDialog(c, b)
+		return
+	}
 	pos := slices.Index(e.order, e.id)
 	step := func(delta int) {
 		a.saveMetadata(e.id, e.metadata(), e.cover)
@@ -186,6 +191,13 @@ func (a *App) editDialog(c *ui.Context) {
 						a.chooseCover()
 					}
 				})
+				if b.HasCover || e.cover != nil {
+					ui.Row(c).Gap(theme.Space8).Children(func() {
+						if widgets.ButtonSized(c, widgets.Secondary, icons.Crop, locales.CoverCropTitle(), theme.ControlS).Grow(1).Clicked() {
+							a.openCoverCrop(b)
+						}
+					})
+				}
 				if e.cover != nil {
 					ui.Text(c, locales.DialogsNewCoverNote()).FontSize(11).TextColor(pal().TextTertiary).TextAlign(ui.Center)
 				}

@@ -1,8 +1,16 @@
 package app
 
 import (
+	"bytes"
+	"image"
+	"image/color"
+	"image/jpeg"
 	"math"
+	"strconv"
+	"strings"
 	"testing"
+
+	"github.com/egoist/mygo/ui"
 )
 
 func TestFitRatioRect(t *testing.T) {
@@ -93,5 +101,120 @@ func TestMoveCrop(t *testing.T) {
 	r := moveCrop(frect{0, 0, 300, 300}, 500, -500, 600, 900)
 	if r != (frect{300, 0, 600, 300}) {
 		t.Errorf("move = %v", r)
+	}
+}
+
+// cropTestCover is a 600×900 cover with something to crop in every part.
+func cropTestCover(t *testing.T) []byte {
+	t.Helper()
+	img := image.NewRGBA(image.Rect(0, 0, 600, 900))
+	for y := 0; y < 900; y++ {
+		for x := 0; x < 600; x++ {
+			img.Set(x, y, color.RGBA{uint8(x * 255 / 600), uint8(y * 255 / 900), 128, 255})
+		}
+	}
+	var buf bytes.Buffer
+	if err := jpeg.Encode(&buf, img, nil); err != nil {
+		t.Fatal(err)
+	}
+	return buf.Bytes()
+}
+
+func absF(n int) int {
+	if n < 0 {
+		return -n
+	}
+	return n
+}
+
+func TestCropCover(t *testing.T) {
+	a := newTestApp(t)
+	tt := ui.NewTester(a.View, 1440, 900)
+	tt.Frame()
+	if err := tt.Click("Piranesi"); err != nil {
+		t.Fatal(err)
+	}
+	tt.Frame()
+	if err := a.lib.SetCover(a.current().ID, cropTestCover(t)); err != nil {
+		t.Fatal(err)
+	}
+	a.reload(nil)
+	tt.Frame()
+	a.openEditor(a.current())
+	tt.Frame()
+	if err := tt.Click("Crop cover"); err != nil {
+		t.Fatal(err)
+	}
+	tt.Frame()
+	if !tt.HasText("Crop cover") {
+		t.Fatalf("crop dialog not open: %q", tt.Texts())
+	}
+	if !tt.HasText("600 × 800 px") || !tt.HasText("3:4") {
+		t.Fatalf("default readout: %q", tt.Texts())
+	}
+	if !tt.HasText("Source 600 × 900 px") {
+		t.Fatalf("source size missing: %q", tt.Texts())
+	}
+	shot(t, tt, "crop")
+
+	// Drag the bottom-right corner inward and check the size follows with
+	// the ratio held.
+	r, ok := tt.Find("bottom right")
+	if !ok {
+		t.Fatal("no bottom-right handle")
+	}
+	cx, cy := r.X+r.W/2, r.Y+r.H/2
+	tt.Press(cx, cy)
+	for i := 1; i <= 4; i++ {
+		tt.Move(cx-8*float32(i), cy-14*float32(i))
+	}
+	tt.Release(cx-32, cy-56)
+	tt.Frame()
+	if tt.HasText("600 × 800 px") {
+		t.Fatalf("drag moved nothing: %q", tt.Texts())
+	}
+	if !tt.HasText("3:4") {
+		t.Fatalf("ratio left the lock: %q", tt.Texts())
+	}
+	var wantW, wantH int
+	for _, s := range tt.Texts() {
+		if !strings.HasSuffix(s, " px") || !strings.Contains(s, " × ") {
+			continue
+		}
+		parts := strings.SplitN(strings.TrimSuffix(s, " px"), " × ", 2)
+		w, err1 := strconv.Atoi(parts[0])
+		h, err2 := strconv.Atoi(parts[1])
+		if err1 == nil && err2 == nil && w != 600 {
+			wantW, wantH = w, h
+		}
+	}
+	if wantW == 0 {
+		t.Fatalf("no size readout: %q", tt.Texts())
+	}
+	shot(t, tt, "crop-dragged")
+
+	if err := tt.Click("Crop"); err != nil {
+		t.Fatal(err)
+	}
+	tt.Frame()
+	if a.crop.open {
+		t.Error("crop dialog still open")
+	}
+	if !a.editOpen {
+		t.Error("editor closed")
+	}
+	img, _, err := image.Decode(bytes.NewReader(a.edit.cover))
+	if err != nil {
+		t.Fatal(err)
+	}
+	b := img.Bounds()
+	if math.Abs(float64(b.Dx())/float64(b.Dy())-0.75) > 0.01 {
+		t.Errorf("cropped %d×%d, not 3:4", b.Dx(), b.Dy())
+	}
+	if absF(b.Dx()-wantW) > 1 || absF(b.Dy()-wantH) > 1 {
+		t.Errorf("cropped %d×%d, readout said %d×%d", b.Dx(), b.Dy(), wantW, wantH)
+	}
+	if !tt.HasText("New cover, saved with the book") {
+		t.Errorf("no new-cover note: %q", tt.Texts())
 	}
 }
